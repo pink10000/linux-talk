@@ -99,7 +99,17 @@ brief history
 
 <!-- 
   speaker_note: |
-  Ken Thompson, Dennis Ritchie, and others at Bell Labs begin development on UNIX. It establishes many core concepts like the command-line interface, hierarchical file system, and the "everything is a file" philosophy that Linux would later adopt.
+  So, to really understand Linux, we need to go back to the beginning. Before every modern operating system, we had UNIX.
+  
+  In 1969, Ken Thompson, Dennis Ritchie, and others at Bell Labs begin development on UNIX. It established many core concepts like the command-line interface, hierarchical file system, and the "everything is a file" philosophy that Linux would later adopt.
+  
+  More importantly, they developed the UNIX Philosophy. The idea is to create small, simple programs that each do only one thing, but do it really well. 
+  
+  The real power comes from chaining these simple tools together to perform incredibly complex tasks, which is a theme we'll see over and over today.
+
+  So, UNIX was revolutionary, stable, and powerful. But, it was proprietary corporate software owned by AT&T. You couldn't freely study its source code, you couldn't share it, and you couldn't modify it to fit your needs.
+
+  This limitation is what inspired Linux.
  -->
 <!-- font_size: 2 -->
 # 1969: UNIX 
@@ -112,44 +122,66 @@ Ken Thompson & Dennis Ritchie
 
 <!-- 
   speaker_note: |
-  Richard Stallman launches the GNU Project with the goal of creating a completely free and open-source UNIX-like operating system. He and others create essential tools like the GCC compiler and the Bash shell, but they lack a kernel.
+  This brings us to the next pivotal moment in our story, launched in 1983 by a programmer at MIT named Richard Stallman. This was the GNU Project.
+
+  Their goal was to build a complete operating system that was entirely free software.
+
+  In particular, 'free' meant 
+  - being able to run any program for any purpose
+  - being able to read and change source code,
+  - being able to share software with anyone,
+  - and being able to distribute your software. 
+
+  It means you can audit the tools you use for security, customize them for performance, and ensure you're never locked into a single vendor's ecosystem (like Apple!).
 -->
 <!-- font_size: 2 -->
 # 1983: GNU Project
+<!-- new_lines: 3 -->
+![](./assets/richard_stallman.jpg)
 
 <!-- end_slide -->
 
 
 <!-- 
   speaker_note: |
-  Linus Torvalds, a student in Finland, posts a now-famous message to a newsgroup announcing his new hobby project: a free operating system kernel.
+  Linus Torvalds, a student in Finland, posted online about his hobby project: a free, UNIX-like kernel from scratch.
+
+  What he actually was working on, was a kernel for GNU tools to run on, setting the stage for a completely free operating system.
+
+  ---
+  Link: https://www.redhotcyber.com/en/post/the-history-of-the-linux-kernel-1-of-2-from-torvalds-to-the-hacker-community/
+
 -->
 <!-- font_size: 2 -->
 # 1991: Linus Torvalds
+<!-- new_lines: 3 -->
+![](./assets/linus_torvalds.jpg)
+<!-- alignment: center -->
+Linus Torvalds
+
+
 
 <!-- end_slide -->
 
 <!-- 
   speaker_note: |
-  The Linux kernel is licensed under the GNU General Public License (GPL). This is a critical moment. It allows developers to legally combine the GNU project's tools with the Linux kernel to create a complete, free operating system, often called GNU/Linux.
+  At this point in time, the Linux kernel is licensed under the GNU General Public License or GPL. It allows developers to legally combine the GNU project's tools with the Linux kernel to create a complete, free operating system, often called GNU/Linux.
+  ---
+  In reality, no one calls it GNU/Linux, just Linux. You'll seem pretentious if you do.
  -->
 <!-- font_size: 2 -->
 # 1992: GNU/Linux
+![](./assets/unix_timeline.png)
+<!-- alignment: center -->
+GNU Timeline
 
 <!-- end_slide -->
 
 
 <!-- 
   speaker_note: | 
-  The first major Linux distributions, like Slackware, Debian, Red Hat Linux are created. These packages bundle the kernel with software and a package manager, making Linux accessible to a wider audience. -->
-<!-- font_size: 2 -->
-# 1993-1997: Major Linux Distributions
+  The first major Linux distributions, like Slackware, Debian, Red Hat Linux are created. These packages bundle the kernel with software and a package manager, making Linux accessible to a wider audience. 
 
-<!-- end_slide -->
-
-
-<!-- 
-  speaker_note: |
   Commerical companies began selling and supporting Linux distributions
   For example, 
   - 1999: IBM joined forces with Red Hat, announcing support for Linux
@@ -157,11 +189,18 @@ Ken Thompson & Dennis Ritchie
   - 2000: The GNOME and KDE desktop environments evolved, making Linux more user friendly for desktop users.
   - 2000: IBM invested $1 billion in Linux development.
   This, combined with the rise of the internet, led to Linux becoming the backbone of the dot-com boom and powered web servers around the world.
+  ---
+  We won't go in depth into what Linux distributions there are or how they're different. Instead, we'll go into the basics of Linux.
 -->
 <!-- font_size: 2 -->
-# 1998-2000: Commercial Linux
+# 1993-2000: Major Linux Distributions
+<!-- new_lines: 3 -->
+![](./assets/linux_distros.jpg)
+<!-- alignment: center -->
+Common Linux Distributions
 
 <!-- end_slide -->
+
 
 <!-- 
   speaker_note: |
@@ -169,17 +208,27 @@ Ken Thompson & Dennis Ritchie
  -->
 <!-- font_size: 2 -->
 # 2007: Android
-
+<!-- new_lines: 3 -->
+![](./assets/android.png)
+<!-- alignment: center -->
+Android Timeline
 
 <!-- end_slide -->
 
 <!-- 
   speaker_note: |
   Today, linux completely dominates cloud computing, super computing, and IoT devices. It runs on the vast majority of the world's servers and is even integrated with Microsoft via the Windows Subsystem for Linux (WSL).
+
+  We also see Linux has been growing among steam users.
+
  -->
 <!-- font_size: 2 -->
 # Today: Ubiquity
-
+<!-- font_size: 1 -->
+<!-- new_lines: 3 -->
+![](./assets/gaming.png)
+<!-- alignment: center -->
+Steam Hardware Survey by OS: September 2025
 
 <!-- end_slide -->
 
