@@ -232,24 +232,232 @@ Steam Hardware Survey by OS: September 2025
 
 <!-- end_slide -->
 
+<!-- jump_to_middle -->
+why linux? 
+===
+<!-- 
+  speaker_note: |
+  Well, why Linux? I could spent the next hour raving why, but for engineers, the answer boils down to 2 reasons:
+  1. Performance
+  2. Automation
+ -->
+<!-- end_slide -->
 
-<!-- font_size: 2 -->
-# why linux? 
+
+<!-- jump_to_middle -->
+terminals, cli, and more
+===
+<!-- 
+  speaker_note: |
+  The single most important tool to Linux is the terminal. Most work you do will probably be interfaced through the terminal. 
+  
+  three different tools:
+  - terminal (the window)
+  - the shell (the program running inside the terminal)
+  - command line interface
+ -->
+<!-- end_slide -->
 
 
+terminals, cli, and more
+===
+<!-- 
+  speaker_note: |
+  live demo!
+  ---
+  script: 
+  ```bash
+  grep 'ERROR' trader.log | cut -d '"' -f 2 | sort | uniq -c | sort -nr
+  ```
+  explain each part and reasoning
+  - piping |
+  - why we use `cut` and what it is used for
+  - sort
+  - `uniq` sorts unique lines, `-c` is used to count
+  - sort
 
+  at the end, explain what `man` is
+ -->
+
+# Scenario 1
+
+You're a `Quant Developer` at Triton Quantitative Trading. It's 7:56 AM on a Tuesday, just minutes before the market opens. Suddenly, the monitoring dashboard lights up—there's a massive spike in failed orders across the system.
+
+As if the morning wasn't chaotic enough, your phone buzzes with a notification: the UCSD Guardian just announced that AS Judicial Board has forced `ACM to split into ACM AI and ACM Cyber`.
+
+Your no-nonsense, JEE topper, 4x IMO Gold medalist team lead rushes to your desk and says:
+
+> "I need you to triage this, now. Don't try to fix anything—we just need to find the biggest fire. I've pulled the raw application log from the production server; it's a multi-gigabyte file named `trader.log` with millions of lines. You can't open it in a regular editor."
+
+The system is bleeding money with every failed trade. The team's immediate debugging efforts depend entirely on your findings.
+
+**Your Mission**: Identify the top 5 most frequent error messages from the log file. How do you do it?
 
 <!-- end_slide -->
-cd (cli fundamentals)
-===
+
+
+Package Management
+---
+<!-- 
+  speaker_note: |
+
+  1. You're a new ...
+  2. You need to see if your strategy is actually profitable. Does the PnL curve go up and to the right, or does it crash and burn?
+  3. You ask ...
+  4. This is a game changer.
+  5. You go back ...
+
+  Live demo:
+  - setup docker daemon: `sudo dockerd &`
+  - load up ubuntu docker `docker run -it --rm -v "$(pwd)"/demo2:/data ubuntu:latest bash`
+  - run `gnuplot`
+    - as we can see, we do not have the command line tool `gnuplot`
+  - run `apt update`
+    - there are many different package managers. in general, if you know how to use one, you can use the rest
+    - for ubuntu, the package manager is `apt`
+  - run `apt install -yq gnuplot`
+    - It's important to mention where these packages come from. 
+    - I'll explain next slide
+  - run `cat /data/pnl_over_time.csv | gnuplot /data/plot.gp`
+  - go back to own terminal and run `kitten icat pnl_plot.png`
+
+ -->
+# Scenario 2
+<!-- font_size: 1 -->
+You're a new analyst at Triton Quantitative Trading. You've spent all week running your first major backtest on a new strategy. The simulation finally finishes, generating a simple CSV file named `pnl_over_time.csv`.
+
+You ask a senior quant how they quickly visualize data on the server. They say:
+
+> Oh, never pull the data down just for a quick plot. Just use a terminal-based plotting tool. I use one called gnuplot. It's the fastest way to see your PnL curve.
+
+You go back to your terminal and type:
+```bash
+cat pnl_over_time.csv | gnuplot
+```
+But instead of the beautiful PnL chart you were expecting, you get this:
+```
+-bash: gnuplot: command not found
+```
 
 <!-- end_slide -->
-apt/pacman/brew (package management)
-===
+
+
+package management
+---
+<!-- speaker_note: |
+  So in our scenario, we had the perfect tool for the job, but it wasn't installed. 
+  Instead of having to go online, find the tool, clone it, compile it (which btw, 
+    is much harder than it sounds), and then run it, 
+  the tool `apt` did all the hardwork for us.
+
+  Back in the day, this what programmers had to do. This has now been solved by 
+    package managers.
+  
+  ---
+  
+  Here are examples of package managers across different machines.
+
+  Most notably, `winget` did not exist until 2021, whereas 
+  - `brew` came out in 2009, 
+  - `pacman` in 2002
+
+  ---
+  When you install a package, you're interacting with a secure supply chain 
+  designed to ensure the software is authentic and safe. Here’s how it works:
+  - Developer Creates Software: A developer or a team writes the source code for an application, like gnuplot.
+  - Maintainer Packages It: A trusted individual, known as a package maintainer, takes that source code. 
+    They are typically volunteers or employees of the Linux distribution (like Debian or Arch). Their job is to:
+    - Compile the code for your system.
+    - Test it to make sure it works correctly.
+    - Package it into the correct format.
+    - These packages get signed and uploaded to ensure they are authentic.
+  - When you run a command like `sudo apt install gnuplot`, the package manager 
+    contacts the repository, downloads the package, verifies the signature, and installs the package.
+  ---
+  - You have trust someone. Unless you want to review and compile the millions
+    or even billions of lines of code, you are going to have to trust that the code 
+    you get is legitimate
+  - For example, the linux kernel itself reached 40 million lines of code in January of this year
+    - https://www.stackscale.com/blog/linux-kernel-surpasses-40-million-lines-code/ 
+  - In general, the maintainers of the packages you use are vette by the organizations that 
+    provide your distribution of Linux. 
+  - The entire process is open, so anyone, including your grandmother can take a look at it. 
+
+  --- 
+  XZ BREACH 
+  - Around 2021, a new developer known as Jia Tan (we'll call him JT) started contributing 
+    to `xz`, an unzipping tool found in almost every Linux machine.
+  - Over 3 years, he built trust my submitting pactches and contributing to the project. 
+  - At some point JT had full control over the project. In early 2024, JT inserted malicious
+    code into the system. A few weeks later, an engineer at Microsoft uncovered the 
+    code when he noticed that logging into a remote server took him an extra 500 milliseconds.
+  - He eventually found the malicious code because the code was publically available. 
+  - Had the `xz` backdoor stayed hidden, millions of users would have been compromised.
+
+  --- 
+  NPM BREACH
+  - In another instance, on September 8, 2025, one of the largest supply chain incidents, 
+  happened to `npm`, the largest software registry in the world. 
+  - Popular libraries and other utilities were hijacked, and had malicious code pushed
+    targeting cryptocurrency wallets and blockchain transactions.
+  - These packages collectively have billions of weekly downloads, making this compromise 
+    both widespread and extremely dangerous.
+
+ -->
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+# examples
+- apt     (Debian / Ubuntu)
+- pacman  (Arch Linux)
+- brew    (macOS)
+- winget  (Windows)
+- nix     (NixOS)
+- dnf     (RedHat)
+- pip, uv, cargo, npm, gradle
+- iOS App Store, Android Play
+
+# where do packages come from
+- centralized online repositories
+- developer creates software (like `gnuplot`)
+- maintainer packages it
+- compiled for system
+
+# trust and security 
+- you have to trust someone
+- vetted maintainers
+- transparency
+- xz utils, npm supply chain attack
+
+
+<!-- column: 1 -->
+```mermaid +render
+graph
+    subgraph "Provider Side"
+        A["<strong>1. Software Developer</strong><br>Writes the source code"]
+        B["<strong>2. Package Maintainer</strong><br>Compiles, tests, and packages"]
+        C["<strong>3. Digitally Sign Package</strong><br>Uses a private GPG key"]
+        D([<strong>Official Repository</strong>])
+    end
+
+    subgraph "User Side           "
+        E["<strong>4. User Request</strong><br><code>sudo apt install</code>"]
+        F["<strong>5. Verify Signature</strong><br>Checks the public key"]
+        G["<strong>Success</strong><br>Package installs safely"]
+        H["<strong>Failure</strong><br>Warns user & aborts"]
+    end
+
+    A --> B --> C -- Uploads to --> D
+    D -- User downloads from --> E --> F
+    F -- Signature Valid --> G
+    F -- Signature Invalid --> H
+
+```
 
 <!-- end_slide -->
-ping (basic networking)
+basic networking
 ===
+
+
 
 <!-- end_slide -->
 lscpu (high performance computing)
