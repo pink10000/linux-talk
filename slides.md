@@ -454,21 +454,135 @@ graph
 ```
 
 <!-- end_slide -->
+
+
 basic networking
 ===
+<!-- 
+  speaker_note: | 
+  Network traffic travels in small chunks called packets. Before a packet is sent 
+  from the Gilman Stock Exchange to our TQT servers, it's wrapped in layers, just 
+  like a letter being prepared for shipping.
 
+  First, the message itself is wrapped in a TCP Segment. This is like a 
+  "certified mail" envelope that adds port numbers to ensure it gets to the right 
+  application and sequence numbers to guarantee it arrives without errors.
 
+  Then, it's wrapped again in an IP Packet, which adds the full source and 
+  destination addresses, like addressing the envelope.
+
+  When the packet arrives at our TQT servers, the Linux kernel unwraps each of 
+  these layers before feeding the clean data into our algorithms.
+
+  This process is reliable, but as you can see, a cross-country trip takes about 35 milliseconds. 
+  For normal internet use, that's instant. For high-frequency trading, it's an eternity. 
+  That's why firms co-locate their servers right next to the exchange, to get that time down 
+  below 0.1 milliseconds (100 microseconds). 
+  
+  But even then, the kernel itself is still too slow.
+ -->
+
+<!-- column_layout: [2, 1, 1] -->
+<!-- column: 0 -->
+# Scenario 3
+The Gilman Stock Exchange just executed one of our TQT orders. It needs to send us a tiny message that says: 
+
+> "You bought 100 shares of SPY at $550.10." 
+
+How does that message cross the country in about 35 milliseconds? 10 miliseconds? 0.1 miliseconds? 
+
+<!-- column: 1 -->
+<!-- include: assets/basic_networking.md -->
 
 <!-- end_slide -->
+
+
+advanced networking
+===
+<!-- speaker_note: |
+  - The Linux kernel is a massive bottleneck. You can think of it like a corporate mailroom. 
+  - The packet arrives at the loading dock (the network card), but before it gets to your desk (your application), 
+    the mailroom has to stop all other work (interrupts), open and log the package (system calls), make a 
+    photocopy of it for their records (data copying), and then finally deliver it. 
+  - This process is safe and orderly, but it's incredibly slow when every microsecond counts.  
+ -->
+
+# kernel processing bottleneck
+- shared listening socket
+- system calls (context switching)
+- data copying, buffering
+- interrupts
+- queueing delays
+- cpu scheduling delays
+- inefficient processing
+
+<!-- end_slide -->
+
+
+advanced networking
+===
+<!-- speaker_note: |
+  Knowing this, we can use some special libraries to skip the kernel. 
+  - One major tool is dataplane development kit or dpdk. It's a set of libraries
+    and drivers for fast packet processing. Originally developed by Intel, 
+    it's now widely used for networking research and HFT applications.
+  - DPDK bypasses the entire Linux networking stack by allowing applications to access the NIC 
+    directly.  
+  - In DPDK, you can pin a CPU core to handle all network traffic. 
+    This eliminates CPU scheduling delays. Polling the NIC reduces context switching overhead.
+  - Again, we really want systems with extremely low latency so this is quite helpful.
+  
+  ---
+  
+  - could use eBPF, but different from DPDK
+    - keep the kernel, balance speed and flexibility
+    - accelerate networking, but you still benefit from kernel's robust and mature features
+    - advanced observability and security
+    - safer
+
+  ---
+  We can also use Smart NICs, which are network interface cards with built-in processing 
+  capabilities. We can offload certain tasks directly to the NIC, reducing the load on the CPU.
+
+  This is a more modern approach used heavily in cloud networking and security.
+
+ -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+# dataplane development kit (dpdk)
+- ignore kernel networking stack
+- user space packet processing
+- poll network interface card (NIC)
+- pin dedicated cpu core
+
+# extended Berkeley Packet Filter (eBPF)
+- in-kernel programmable packet processing
+- balance speed and flexibility
+
+# hardware optimizations
+- dedicated cpu core
+- direct memory access 
+- smart NICs
+
+
+<!-- column: 1 -->
+![](./assets/dpdk.png)
+<!-- alignment: center -->
+UIUC, ECE 598, FA20
+
+<!-- reset_layout -->
+![](./assets/smart_nic.png)
+SmartNIC Layout
+
+<!-- end_slide -->
+
+
 lscpu (high performance computing)
 ===
 
 <!-- end_slide -->
 nix-shell (reproducible environments)
-===
-
-<!-- end_slide -->
-(git) linux @ a job
 ===
 
 <!-- end_slide -->
