@@ -7,6 +7,7 @@ slides for intro to linux talk for ucsd tqt
 - [presenterm](https://github.com/mfontanini/presenterm), 
 - mermaid-cli
 - a kitty image protocol compliant terminal (like kitty or ghostty)
+- g++
 
 then run with 
 ```

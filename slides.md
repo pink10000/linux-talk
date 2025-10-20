@@ -578,12 +578,52 @@ SmartNIC Layout
 <!-- end_slide -->
 
 
-lscpu (high performance computing)
+high performance computing
 ===
+<!-- speaker_note: |
+  1. It's Friday ... 
+  2. Is your code inefficient? Is it a hardware problem? Linux gives you the tools to be a performance detective.
+  3. Play scenario audio 
+  4. What's wrong?
+  ---
+  LIVE DEMO!
+  inspect, monitor, and profile
+
+  1. run ./backtest1
+  2. open another terminal and run `top`, `htop`, `btop`
+  3. see it is slow. "Oh! that's why it's so slow! it's only using one core!"
+  4. kill backtest1
+  5. run ./backtest2
+  6. open another terminal and run `top`, `htop`, `btop`
+  7. see it is fast. "Wow! it's using all cores! that's why it's so much faster!"
+  8. quit program.
+
+  ---
+  Conclusion:
+  - The point of this scenario is to show you that Linux gives you the tools to 
+    inspect, monitor, and profile your code.
+  - In this case, the first backtest was only using one core, which is why
+    it was so slow. The second backtest used all cores, making it much faster.
+  - In reality, performance issues are often more subtle and complex,
+    but with Linux, you have the tools to investigate and optimize your code.
+
+ -->
+
+# Scenario 4
+It's Friday late afternoon at the TQT office. GSE just closed, and it's time for you to start backtesting your new trading strategy on a powerful server. 
+You expect it to take an hour. Three hours later, it's still running. Worse yet, your team manager walks by and asks:
+
+> "Why is your backtest taking so long? Is it the code or the hardware? I expect you to finish before the weekend. Also, the company values your time and well-being, so I'm kicking you out early today. Our new CEO Rudy just sent out a company-wide email about work-life balance."
+
+What's wrong?
 
 <!-- end_slide -->
+
+
 nix-shell (reproducible environments)
 ===
+
+
 
 <!-- end_slide -->
 conclusion
