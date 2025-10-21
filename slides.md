@@ -6,8 +6,8 @@ theme:
       margin:
         percent: 8
 
-title: learn linux
-sub_title: and why you should care
+title: linux 101 for quants
+sub_title: and engineers!
 author: Kyle Trinh
 ---
 
@@ -44,10 +44,11 @@ built with
 - `kitty` (presentation medium)
 - color scheme: ibm oxocarbon base-16
 - font: berkeley mono
+- sriharsha kavuri, jacob root
 
 <!-- column: 1 -->
-
-![image:width:70%](./assets/scale.jpg)
+<!-- new_lines: 2 -->
+![image:width:100%](./assets/scale.jpg)
 
 <!-- alignment: center -->
  pasadena, california
@@ -620,16 +621,116 @@ What's wrong?
 <!-- end_slide -->
 
 
-nix-shell (reproducible environments)
+reproducible environments
+===
+<!-- speaker_note: |
+  1. read the scenario
+  2. This is one of the most common and frustrating problems in all of software. 
+     You spend weeks on a project, like a backtesting script. It runs perfectly on your laptop. 
+     You git push your code, and your manager tries to run it on the main server... and it crashes.
+  3. Why? Well maybe because the server is running an older version of `g++` that doesn't support the features you used. 
+      Or maybe your code depends on a specific version of some library, but the server has an older, incompatible one installed
+  4. Python from 3.9 to 3.10, and your code uses a feature only in 3.10
+  5. This is called environment drift, and it breaks collaboration between teams. 
+
+  Fortunately, we have tools for this. The biggest one is Docker.
+  ---
+  Docker features:
+  - package code + environment
+  - system libraries, os, python version, pip packages
+  - dockerfile: recipe for environment
+  - docker_compose.yml: define and run multi-container applications
+
+  This environment is now portalable and repducible. If it runs in a 
+  Docker container on your laptop, it is guaranteed to run in a container on the server.
+
+  - mention CI/CD pipelines
+    - Continuous Integration and Continuous Deployment (CI/CD) pipelines automate the process of building, testing, and deploying applications.
+    - you can just set up a pipeline to automatically build and 
+    test your Docker images whenever you push new code
+    - this will not be your job. the people who do this kind of work are called DevOps engineers
+
+  There's also a newer, more advanced tool called Nix.
+
+  - if docker is like a shipping container that packages everything up, Nix is like a perfect, 
+    deterministic blueprint. 
+  - It's a purely functional package manager that can build your entire system from the ground up.
+  - atomic upgrades and rollbacks
+    - if an upgrade fails, you can instantly roll back to the previous, perfectly working state.
+  - reproducible builds
+  - steeper learning curve, but ultimate guarantee of reproducibility
+
+ -->
+# Scenario 5
+Okay, so you've finally finished your backtesting script. Your team lead says CEO Rudy wants to see it in action. You git push your code to the main server, and your manager tries to run it... but it crashes immediately. He grumbles under his breath:
+
+> Did you really test this on your machine? It doesn't work at all. You know how Rudy is about deadlines...
+
+But why? It worked perfectly on your machine!
+
+<!-- end_slide -->
+
+
+reproducible environments
 ===
 
+<!-- column_layout: [1, 1] -->
 
+<!-- column: 0 -->
+# docker
+- package code + environment
+- system libraries, os, python version, pip packages
+- defined by a `dockerfile`
+- `docker-compose.yml` for multi-container applications
+- the standard for CI/CD pipelines
+- creates a portable, isolated image
+
+
+<!-- column: 1 -->
+# nixos 
+- purely functional package manager
+- declarative system configuration
+- atomic upgrades and rollbacks
+- used by d.e shaw, anduril, target, google, etc.
+
+<!-- reset_layout -->
+```bash +exec_replace +no_background
+qrencode -t ansiutf8 "https://www.youtube.com/watch?v=h8oyoDMUM2I"
+```
+<!-- alignment: center -->
+Case for NixOS on The Homeserver
 
 <!-- end_slide -->
 conclusion
 ===
 
+<!-- column_layout: [5, 7, 7] -->
+<!-- column: 0 -->
+- linux is everywhere
+- powerful command line tools
+- package management and security
+- lot's of research done on the kernel
+
+
+> hope you learned a lot!
+
+<!-- column: 1 -->
+source code:
+```bash +exec_replace +no_background
+qrencode -m 2 -t ansiutf8 "https://github.com/pink10000/linux-talk"
+```
+
+<!-- column: 2 -->
+linkedin: 
+```bash +exec_replace +no_background
+qrencode -m 2 -t ansiutf8 "https://linkedin.com/in/kyletrinh"
+```
+
+
 <!-- end_slide -->
+
+
+<!-- jump_to_middle -->
 q&a
 ===
 
