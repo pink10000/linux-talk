@@ -14,6 +14,9 @@ then run with
 presenterm slides.md -x --present
 ```
 
+## audio
+hit ctrl+e to play scripts
+
 # credits:
 - [presenterm](https://github.com/mfontanini/presenterm)
 - harsha kavuri (audio)
