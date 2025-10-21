@@ -16,3 +16,6 @@ presenterm slides.md -x --present
 
 # credits:
 - [presenterm](https://github.com/mfontanini/presenterm)
+- harsha kavuri (audio)
+- jacob root (verification)
+- samir + anthony (video)

@@ -40,11 +40,10 @@ whoami
 #### acknolwedgements
 
 built with 
-- `presenterm` (slides) 
-- `kitty` (presentation medium)
-- color scheme: ibm oxocarbon base-16
-- font: berkeley mono
-- sriharsha kavuri, jacob root
+- slides:              `presenterm`
+- presentation medium: `kitty`
+- color scheme:        `ibm oxocarbon base-16`
+- font:                `berkeley mono`
 
 <!-- column: 1 -->
 <!-- new_lines: 2 -->
@@ -286,7 +285,7 @@ You're a `Quant Developer` at Triton Quantitative Trading. It's 7:56 AM on a Tue
 
 As if the morning wasn't chaotic enough, your phone buzzes with a notification: the UCSD Guardian just announced that AS Judicial Board has forced `ACM to split into ACM AI and ACM Cyber`.
 
-Your no-nonsense, JEE topper, 4x IMO Gold medalist team lead rushes to your desk and says:
+Your no-nonsense, 4x IMO Gold medalist team lead rushes to your desk and says:
 
 > "I need you to triage this, now. Don't try to fix anything—we just need to find the biggest fire. I've pulled the raw application log from the production server; it's a multi-gigabyte file named `trader.log` with millions of lines. You can't open it in a regular editor."
 
@@ -294,6 +293,9 @@ The system is bleeding money with every failed trade. The team's immediate debug
 
 **Your Mission**: Identify the top 5 most frequent error messages from the log file. How do you do it?
 
+```bash +exec +no_background
+/// ffplay -v 0 -nodisp -autoexit -i ./demo1/triage.ogg
+```
 <!-- end_slide -->
 
 
@@ -333,12 +335,17 @@ You ask a senior quant how they quickly visualize data on the server. They say:
 
 You go back to your terminal and type:
 ```bash
-cat pnl_over_time.csv | gnuplot
+cat pnl_over_time.csv | gnuplot /data/plot.gp
 ```
 But instead of the beautiful PnL chart you were expecting, you get this:
 ```
 -bash: gnuplot: command not found
 ```
+
+```bash +exec +no_background
+/// ffplay -v 0 -nodisp -autoexit -i ./demo2/pnl.ogg
+```
+
 
 <!-- end_slide -->
 
