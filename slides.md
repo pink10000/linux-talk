@@ -740,5 +740,3 @@ qrencode -m 2 -t ansiutf8 "https://linkedin.com/in/kyletrinh"
 <!-- jump_to_middle -->
 q&a
 ===
-
-<!-- end_slide -->

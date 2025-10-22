@@ -8,6 +8,7 @@ slides for intro to linux talk for ucsd tqt
 - mermaid-cli
 - a kitty image protocol compliant terminal (like kitty or ghostty)
 - g++
+- ffmpeg
 
 then run with 
 ```
